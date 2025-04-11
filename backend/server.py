@@ -25,10 +25,7 @@ def get_teams():
     for dic in req:
         
         data.append({"id": dic["id"], "name": dic["name"]})
-        data.sort()
-    
-    
-    
+   
     return data
 
 @app.route('/teams/<id>')
@@ -43,8 +40,36 @@ def get_roster(id):
     
     
     for dic in req:
-        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"]})
+        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"]})
     return data
+    
+@app.route('/player/<id>/hitting')
+def get_player_hitting_stats(id):
+
+    req = requests.get(
+        "http://statsapi.mlb.com/api/v1/people/" + id + "/stats?stats=season&group=hitting"
+    ).json()
+    
+    #extract hitting stats from request
+    
+    req = req["stats"][0]["splits"][0]["stat"]
+
+    return req
+    
+@app.route('/player/<id>/pitching')
+def get_player_pitching_stats(id):
+
+    req = requests.get(
+        "http://statsapi.mlb.com/api/v1/people/" + id + "/stats?stats=season&group=pitching"
+    ).json()
+    
+    #extract hitting stats from request
+    
+    req = req["stats"][0]["splits"][0]["stat"]
+
+    return req
+    
+    
 # Running app
 if __name__ == '__main__':
     app.run(debug=True, port=5100)

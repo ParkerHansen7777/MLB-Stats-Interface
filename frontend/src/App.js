@@ -8,13 +8,40 @@ const Team = props => (
 );
 
 const Player = props => (
-	<option>{props.player.name}</option>
+	<option value={[props.player.id, props.player.pos]}>{props.player.name + " - " + props.player.pos}</option>
+);
+
+
+const Bat = props => (
+	<tr>
+		<td>{props.stat.avg}</td>
+		<td>{props.stat.obp}</td>
+		<td>{props.stat.slg}</td>
+		<td>{props.stat.ops}</td>
+		<td>{props.stat.homeRuns}</td>
+	</tr>
+);
+
+
+const Pitch = props => (
+	<tr>
+		<td>{props.stat.gamesPlayed}</td>
+		<td>{props.stat.wins}</td>
+		<td>{props.stat.losses}</td>
+		<td>{props.stat.era}</td>
+		<td>{props.stat.whip}</td>
+		<td>{props.stat.inningsPitched}</td>
+		
+	</tr>
 );
 
 export default function App() {
     
 	const [teams, setTeams] = useState([]);
 	const [roster, setRoster] = useState([]);
+	const [player, setPlayer] = useState([])
+	const [bat, setBat] = useState([]);
+	const [pitch, setPitch] = useState([]);
 	
 	
 	 // Using useEffect for single rendering
@@ -31,7 +58,7 @@ export default function App() {
 				
             })
         );
-    }, [roster]);
+    }, []);
 	
 	
 	function teamList(teams){
@@ -48,8 +75,18 @@ export default function App() {
 		})
 	}
 	
+	function batLine(bat){
+		console.log(bat)
+		
+			return <Bat stat={bat} />;
+	}
 	
-	function handleChoice(e){
+	function pitchLine(pitch){
+		return <Pitch stat={pitch} />
+	}
+	
+	
+	function handleTeam(e){
 		console.log(e)
 		fetch(`/teams/${e}`).then((res) =>
 			res.json().then((data) => {
@@ -58,18 +95,76 @@ export default function App() {
 		);
 	}
 	
+	function handlePlayer(e){
+		setBat([])
+		setPitch([])
+		console.log(e)
+		e = e.split(",")
+		
+		console.log(e)
+		if (e[1] != 'P'){
+		
+			fetch(`/player/${e[0]}/hitting`).then((res) =>
+				res.json().then((data) => {
+					setBat(data);
+				})
+			);
+		}
+		else{
+			fetch(`/player/${e[0]}/pitching`).then((res) =>
+				res.json().then((data) => {
+					setPitch(data);
+				})
+			);
+		}
+	}
+	
     return (
         <div className="App">
             <h1>MLB Stats API</h1>
 			<label>Choose a Team</label>
-			<select onClick={e => handleChoice(e.target.value)}>
+			<select onClick={e => handleTeam(e.target.value)}>
 			{teamList(teams)}
 			</select>
 			
 			<label>Choose a Player</label>
-			<select>
+			<select onClick={e => handlePlayer(e.target.value)}>
 			{rosterList(roster)}
 			</select>
+			
+			
+			<h2>Hitting Stats</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>AVG</th>
+						<th>OBP</th>
+						<th>SLG</th>
+						<th>OPS</th>
+						<th>HR</th>
+					</tr>
+				</thead>
+				<tbody>
+				{batLine(bat)}
+				</tbody>
+			</table>
+			
+			<h2>Pitching Stats</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Games Played</th>
+						<th>W</th>
+						<th>L</th>
+						<th>ERA</th>
+						<th>WHIP</th>
+						<th>Innings Pitched</th>
+					</tr>
+				</thead>
+				<tbody>
+				{pitchLine(pitch)}
+				</tbody>
+			</table>
 			
         </div>
     );
