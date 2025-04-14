@@ -39,9 +39,9 @@ export default function App() {
     
 	const [teams, setTeams] = useState([]);
 	const [roster, setRoster] = useState([]);
-	const [player, setPlayer] = useState([])
 	const [bat, setBat] = useState([]);
 	const [pitch, setPitch] = useState([]);
+	const [img, setImg] = useState("");
 	
 	
 	 // Using useEffect for single rendering
@@ -100,7 +100,7 @@ export default function App() {
 		setPitch([])
 		console.log(e)
 		e = e.split(",")
-		
+		setImg(`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${e[0]}/headshot/67/current`);
 		console.log(e)
 		if (e[1] != 'P'){
 		
@@ -132,6 +132,7 @@ export default function App() {
 			{rosterList(roster)}
 			</select>
 			
+			<img src={img} alt="player"/>
 			
 			<h2>Hitting Stats</h2>
 			<table>
@@ -165,7 +166,6 @@ export default function App() {
 				{pitchLine(pitch)}
 				</tbody>
 			</table>
-			
         </div>
     );
 }
