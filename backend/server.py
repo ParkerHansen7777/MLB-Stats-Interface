@@ -1,4 +1,5 @@
 from flask import Flask
+from operator import itemgetter
 #import statsapi
 import requests
 #import datetime
@@ -25,7 +26,7 @@ def get_teams():
     for dic in req:
         
         data.append({"id": dic["id"], "name": dic["name"]})
-   
+    data = sorted(data, key=itemgetter('name'))
     return data
 
 @app.route('/teams/<id>')
