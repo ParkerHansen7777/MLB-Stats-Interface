@@ -12,26 +12,28 @@
 .grid-container{
   display: grid;
   align-self: center;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-columns: repeat(6, 15vh);
   grid-gap: 10px;
-
-  min-height: fit-content;
-  
 }
 
-.grid-container > button {
-  display: block;
+.grid-container > .button{
+  display:inline-block;
+  color:#ffffff;
+  border:1px solid #CCC;
+  background:rgb(80,80,80);
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+  cursor:pointer;
+  vertical-align:middle;
   width: auto;
-  color: white;
-  background-color: rgb(80, 80, 80);
+  padding: 5px;
+  text-align: center;
+  border-radius: 2%;
 }
 
-.grid-container > button > img{
-  height: 30%;
-  width: auto;
+.grid-container > .button > img{
   display: block;
-  justify-self: center;
+  width: 100%;
+  max-height: 100%;
 }
 
 footer{
@@ -39,4 +41,3 @@ footer{
   background-color: grey;
   width: 100%;
 }
-
