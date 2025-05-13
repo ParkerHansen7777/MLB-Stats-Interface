@@ -4,26 +4,26 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 
     
     const Bat = props => (
-        <tr>
-            <td>{props.stat.avg}</td>
-            <td>{props.stat.obp}</td>
-            <td>{props.stat.slg}</td>
-            <td>{props.stat.ops}</td>
-            <td>{props.stat.homeRuns}</td>
-        </tr>
+        <>
+		<span>{props.stat.avg}</span>
+		<span>{props.stat.obp}</span>
+		<span>{props.stat.slg}</span>
+		<span>{props.stat.ops}</span>
+		<span>{props.stat.homeRuns}</span>
+		</>
+		
     );
     
     
     const Pitch = props => (
-        <tr>
-            <td>{props.stat.gamesPlayed}</td>
-            <td>{props.stat.wins}</td>
-            <td>{props.stat.losses}</td>
-            <td>{props.stat.era}</td>
-            <td>{props.stat.whip}</td>
-            <td>{props.stat.inningsPitched}</td>
-            
-        </tr>
+        <>
+		<span>{props.stat.gamesPlayed}</span>
+		<span>{props.stat.wins}</span>
+		<span>{props.stat.losses}</span>
+		<span>{props.stat.era}</span>
+		<span>{props.stat.whip}</span>
+		<span>{props.stat.inningsPitched}</span>
+		</>
     );
     
     
@@ -44,47 +44,44 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
     return(
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-				<img className="stats-headshot"src={Img} alt=""/>
 				<div className="container-row">
-					{BattingStats.length !== 0 && 
-					<div className="container-col">
-						<h2>Hitting Stats</h2>
-						<table >
-							<thead>
-								<tr>
-									<th>AVG</th>
-									<th>OBP</th>
-									<th>SLG</th>
-									<th>OPS</th>
-									<th>HR</th>
-								</tr>
-							</thead>
-							<tbody>
-							{batLine(BattingStats)}
-							</tbody>
-						</table>
-					</div>}
-					{PitchingStats.length !== 0 && 
-					<div className="container-col">
-					<h2>Pitching Stats</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Games Played</th>
-								<th>W</th>
-								<th>L</th>
-								<th>ERA</th>
-								<th>WHIP</th>
-								<th>Innings Pitched</th>
-							</tr>
-						</thead>
-						<tbody>
-						{pitchLine(PitchingStats)}
-						</tbody>
-					</table>
-					</div>}
+					<img className="stats-headshot"src={Img} alt=""/>
+					<div className="container-row">
+						{BattingStats.length !== 0 && 
+						<div className="container-col">
+							<h2>Hitting Stats</h2>
+							<div className="container-row">
+								<div className="container-col">
+									<span>AVG</span>
+									<span>OBP</span>
+									<span>SLG</span>
+									<span>OPS</span>
+									<span>HR</span>
+								</div>
+								<div className="container-col">
+									{batLine(BattingStats)}
+								</div>
+							</div>
+						</div>}
+						{PitchingStats.length !== 0 && 
+						<div className="container-col">
+							<h2>Pitching Stats</h2>
+							<div className="container-row">
+								<div className="container-col">
+									<span>Games Played</span>
+									<span>Wins</span>
+									<span>Loses</span>
+									<span>ERA</span>
+									<span>WHIP</span>
+									<span>Innings Pitched</span>
+								</div>
+								<div className="container-col">
+									{pitchLine(PitchingStats)}
+								</div>
+							</div>
+						</div>}
+					</div>
 				</div>
-				
 			</>
     )
 }

@@ -12,6 +12,7 @@
 .container-col{
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .container-row{
@@ -62,9 +63,11 @@ footer{
 
 
 .stats-headshot{
-  max-width: 20%;
+  width: 15%;
   height: auto;
 }
+
+
 
 
 
