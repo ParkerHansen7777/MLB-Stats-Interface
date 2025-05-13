@@ -52,10 +52,12 @@ def get_player_hitting_stats(id):
     ).json()
     
     #extract hitting stats from request
-    
-    req = req["stats"][0]["splits"][0]["stat"]
+    if not req["stats"]:
+        return []
+    else:
+        req = req["stats"][0]["splits"][0]["stat"]
 
-    return req
+        return req
     
 @app.route('/player/<id>/pitching')
 def get_player_pitching_stats(id):
@@ -64,11 +66,14 @@ def get_player_pitching_stats(id):
         "http://statsapi.mlb.com/api/v1/people/" + id + "/stats?stats=season&group=pitching"
     ).json()
     
-    #extract hitting stats from request
-    
-    req = req["stats"][0]["splits"][0]["stat"]
+    #extract pitching stats from request
+    #print(req)
+    if not req["stats"]:
+        return []
+    else:
+        req = req["stats"][0]["splits"][0]["stat"]
 
-    return req
+        return req
     
     
 # Running app

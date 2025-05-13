@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function StatsDisplay({handleBack, bat, pitch}){
+export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img}){
 
     
     const Bat = props => (
@@ -30,50 +30,61 @@ export default function StatsDisplay({handleBack, bat, pitch}){
     
     function batLine(bat){
 		//console.log(bat)
+		return <Bat stat={bat} />;
 		
-			return <Bat stat={bat} />;
 	}
 	
 	function pitchLine(pitch){
+		//console.log(pitch)
 		return <Pitch stat={pitch} />
+		
 	}
 
 
     return(
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-				<h2>Hitting Stats</h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>AVG</th>
-							<th>OBP</th>
-							<th>SLG</th>
-							<th>OPS</th>
-							<th>HR</th>
-						</tr>
-					</thead>
-					<tbody>
-					{batLine(bat)}
-					</tbody>
-				</table>
+				<img className="stats-headshot"src={Img} alt=""/>
+				<div className="container-row">
+					{BattingStats.length !== 0 && 
+					<div className="container-col">
+						<h2>Hitting Stats</h2>
+						<table >
+							<thead>
+								<tr>
+									<th>AVG</th>
+									<th>OBP</th>
+									<th>SLG</th>
+									<th>OPS</th>
+									<th>HR</th>
+								</tr>
+							</thead>
+							<tbody>
+							{batLine(BattingStats)}
+							</tbody>
+						</table>
+					</div>}
+					{PitchingStats.length !== 0 && 
+					<div className="container-col">
+					<h2>Pitching Stats</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Games Played</th>
+								<th>W</th>
+								<th>L</th>
+								<th>ERA</th>
+								<th>WHIP</th>
+								<th>Innings Pitched</th>
+							</tr>
+						</thead>
+						<tbody>
+						{pitchLine(PitchingStats)}
+						</tbody>
+					</table>
+					</div>}
+				</div>
 				
-				<h2>Pitching Stats</h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Games Played</th>
-							<th>W</th>
-							<th>L</th>
-							<th>ERA</th>
-							<th>WHIP</th>
-							<th>Innings Pitched</th>
-						</tr>
-					</thead>
-					<tbody>
-					{pitchLine(pitch)}
-					</tbody>
-				</table>
 			</>
     )
 }

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"
 
 
-export default function TeamSelector({handleTeam, teams, setTeams}){
+export default function TeamSelector({handleTeam, Teams, setTeams}){
 
     useEffect(() => {
         // Using fetch to fetch the api from 
@@ -16,7 +16,7 @@ export default function TeamSelector({handleTeam, teams, setTeams}){
 				
             })
         );
-    }, []);
+    }, [setTeams]);
     
     function teamList(teams){
 		
@@ -36,7 +36,7 @@ export default function TeamSelector({handleTeam, teams, setTeams}){
         <>
 			<span>Choose a Team</span>
 			<div className="grid-container">
-				{teamList(teams)}
+				{teamList(Teams)}
 			</div>
 		</>
     );
