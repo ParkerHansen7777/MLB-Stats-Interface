@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img}){
+export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos}){
 
     
     const Bat = props => (
@@ -45,8 +45,12 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
 				<div className="container-row">
-					<img className="stats-headshot"src={Img} alt=""/>
-					<div className="container-row">
+					<div className="playercard">
+						<img className="stats-headshot"src={Img} alt=""/>
+						<div className="player-name">{PlayerName}</div>
+            			<div className="player-name">{PlayerPos}</div>
+					</div>
+					
 						{BattingStats.length !== 0 && 
 						<div className="container-col">
 							<h2>Hitting Stats</h2>
@@ -80,7 +84,7 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 								</div>
 							</div>
 						</div>}
-					</div>
+					
 				</div>
 			</>
     )

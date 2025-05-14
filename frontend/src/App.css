@@ -6,13 +6,28 @@
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  width: auto;
+  width: 100%;
+  background-color: rgb(155, 154, 154);
+}
+.btn.btn-primary{
+  background-color: rgb(187, 152, 107);
+  border-color: rgb(187, 152, 107);
+}
+
+.btn.btn-primary:hover{
+  background-color: rgb(168, 136, 94);
+  border-color: rgb(168, 136, 94);
+}
+
+#compare-row{
+  gap: 3%;
 }
 
 .container-col{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .container-row{
@@ -25,7 +40,7 @@
 footer{
   margin-top: 2%;
   color: white;
-  background-color: grey;
+  background-color: rgb(168, 136, 94);
   width: 100%;
 }
 
@@ -40,8 +55,8 @@ footer{
 .grid-container > .button{
   display:inline-block;
   color:#ffffff;
-  border:1px solid #CCC;
-  background:rgb(80,80,80);
+  border:1px solid rgb(9, 96, 63);
+  background:rgb(7, 78, 51);
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
   cursor:pointer;
   vertical-align:middle;
@@ -52,19 +67,48 @@ footer{
 }
 
 .grid-container > .button:hover{
-  background-color: rgb(55, 55, 55)
+  background-color: rgb(6, 59, 39)
 }
 
 .grid-container > .button > img{
   display: block;
   width: 100%;
   max-height: 100%;
+  border-radius: 2%;
+}
+
+.header{
+  background-color: rgb(6, 59, 39);
+  color: white;
+  width: 100%;
+}
+
+.playercard{
+  display:inline-block;
+  color:#ffffff;
+  border:1px solid rgb(9, 96, 63);
+  background:rgb(7, 78, 51);
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+  cursor:pointer;
+  vertical-align:middle;
+  width: 20%;
+  padding: 5px;
+  text-align: center;
+  border-radius: 2%;
+  justify-items: center;
 }
 
 
 .stats-headshot{
-  width: 15%;
-  height: auto;
+  display: block;
+  width: 100%;
+  max-height: 100%;
+  border-radius: 2%;
+}
+
+#statline{
+  background-color: rgb(81, 81, 81);
+  color: white;
 }
 
 
