@@ -84,10 +84,10 @@ export default function App() {
 				<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
 			}
 			{visible === "players" &&
-				<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} handleCompare={handleCompare}/> 
+				<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
 			}
 			{visible === "stats" && 
-				<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos}/>
+				<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} handleCompare={handleCompare}/>
 			}
 			{visible === "compare" &&
 				<Comparison handleBack={handleBack} />

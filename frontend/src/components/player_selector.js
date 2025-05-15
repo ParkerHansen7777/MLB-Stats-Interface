@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function PlayerSelector({handlePlayer, handleBack, handleCompare, roster}){
+export default function PlayerSelector({handlePlayer, handleBack, roster}){
     
     
     
@@ -15,32 +15,40 @@ export default function PlayerSelector({handlePlayer, handleBack, handleCompare,
 
 
     function pitcherList(roster){
-        return roster.map(curr => {
-			if(curr.pos === "P" || curr.pos === "TWP"){
+        
+        function checkPos(curr){
+            return curr.pos === "P" || curr.pos === "TWP"
+        }
+        
+        
+        const filtered = roster.filter(checkPos)
+        return filtered.map(curr => {
             return <Player player={curr} key={curr.id} />;
-            }
 		})
     }
 
-    function PPlayerList(roster){
-        return roster.map(curr => {
-			if(curr.pos !== "P"){
+    function pPlayerList(roster){
+        
+        function checkPos(curr){
+            return curr.pos !== "P"
+        }
+
+        const filtered = roster.filter(checkPos)
+        return filtered.map(curr => {
             return <Player player={curr} key={curr.id} />;
-            }
 		})
     }
     
     return (
         <>
             <button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-            <button className="btn btn-success" onClick={() => handleCompare() }>Compare</button>
             <span>Choose a player from the active roster</span>
             <div className="container-row">
                 <div className="grid-container" style={{gridTemplateColumns: "repeat(3, 15vh)"}}>
                     {pitcherList(roster)}
                 </div> 
                 <div className="grid-container" style={{gridTemplateColumns: "repeat(3, 15vh)"}}>
-                    {PPlayerList(roster)}
+                    {pPlayerList(roster)}
                 </div>
             </div>
 

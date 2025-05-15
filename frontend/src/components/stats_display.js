@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos}){
+export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos, handleCompare}){
 
     
     const Bat = props => (
@@ -44,6 +44,7 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
     return(
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
+				<button className="btn btn-success" onClick={() => handleCompare() }>Compare</button>
 				<div className="container-row">
 					<div className="playercard">
 						<img className="stats-headshot"src={Img} alt=""/>
