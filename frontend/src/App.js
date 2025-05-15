@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TeamSelector from "./components/team_selector";
 import PlayerSelector from "./components/player_selector";
@@ -19,18 +19,7 @@ export default function App() {
 	const [playerName, setName] = useState("");
 	const [playerPos, setPos] = useState("");
 
-	
-	 // Using useEffect for single rendering
-    useEffect(() => {
-        // Using fetch to fetch the api from 
-        // flask server it will be redirected to proxy
-       
-    }, [visible]);
-	
-	
-	
-	
-	
+
 	function handleTeam(e){
 		//console.log(e)
 		setVisible("players")
@@ -47,21 +36,20 @@ export default function App() {
 		setImg(`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${e[0]}/headshot/67/current`)
 		setPos(e[1])
 		setName(e[2])
-		//if (e[1] !== 'P'){
+		
 		
 			fetch(`/player/${e[0]}/hitting`).then((res) =>
 				res.json().then((data) => {
 					setBat(data);
 				})
 			);
-		//}
-		//else{
+		
 			fetch(`/player/${e[0]}/pitching`).then((res) =>
 				res.json().then((data) => {
 					setPitch(data);
 				})
 			);
-		//}
+		
 	}
 
 	function handleBack(){
