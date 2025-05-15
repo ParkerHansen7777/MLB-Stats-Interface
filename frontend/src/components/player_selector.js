@@ -20,7 +20,6 @@ export default function PlayerSelector({handlePlayer, handleBack, roster}){
             return curr.pos === "P" || curr.pos === "TWP"
         }
         
-        
         const filtered = roster.filter(checkPos)
         return filtered.map(curr => {
             return <Player player={curr} key={curr.id} />;
