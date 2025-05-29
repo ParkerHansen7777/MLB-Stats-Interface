@@ -1,6 +1,9 @@
 import React from "react"
+import Popup from 'reactjs-popup'
+//import 'reactjs-popup/dist/index.css';
 
-export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos, handleCompare}){
+
+export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos, visible, TeamSelector, PlayerSelector}){
 
     
     const Bat = props => (
@@ -40,11 +43,37 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 		
 	}
 
+	
+	function handleCompare(close){
+		return(
+		<div>
+			<div>
+				{visible === "teams" &&
+					TeamSelector
+				}
+				{visible === "players" &&
+					PlayerSelector
+				}
+			</div>
+			<div>
+				<button onClick={() => close() }>Close modal</button>
+			</div>
+		</div>
+		)
+	}
+	
 
     return(
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-				<button className="btn btn-success" onClick={() => handleCompare() }>Compare</button>
+				<Popup trigger=
+				{<button className="btn btn-success">Compare</button>}
+				modal nested>
+					{
+					close => (
+					handleCompare(close)
+				)}
+				</Popup>
 				<div className="container-row">
 					<div className="playercard">
 						<img className="stats-headshot"src={Img} alt=""/>
@@ -85,7 +114,6 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 								</div>
 							</div>
 						</div>}
-					
 				</div>
 			</>
     )

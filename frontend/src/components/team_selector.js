@@ -11,9 +11,6 @@ export default function TeamSelector({handleTeam, Teams, setTeams}){
                 // Setting a data from api
                 //console.log(data);
 				setTeams(data);
-				//console.log(teams);
-				
-				
             })
         );
     }, [setTeams]);

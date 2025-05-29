@@ -19,6 +19,14 @@ export default function App() {
 	const [playerName, setName] = useState("");
 	const [playerPos, setPos] = useState("");
 
+	const [compVisible, setCVisible] = useState("teams")
+	const [compRoster, setCRoster] = useState([])
+	const [compImg, setCImg] = useState("")
+	const [compName, setCName] = useState("")
+	const [compPos, setCPos] = useState("")
+	const [compBat, setCBat] = useState([])
+	const [compPitch, setCPitch] = useState([])
+
 
 	function handleTeam(e){
 		//console.log(e)
@@ -71,10 +79,48 @@ export default function App() {
 		}
 	}
 
-	function handleCompare(){
-		setVisible("compare")
+	
+	function handleCompBack(){
+		setVisible("stats")
+		setCVisible("teams")
+		setCRoster([])
+		setCBat([])
+		setCPitch([])
+		setCImg("")
+		setCName("")
+		setCPos("")
 	}
 	
+	function handleCompPlayer(e){
+		setVisible("compare")
+		setCImg(`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${e[0]}/headshot/67/current`)
+		setCPos(e[1])
+		setCName(e[2])
+		
+		
+			fetch(`/player/${e[0]}/hitting`).then((res) =>
+				res.json().then((data) => {
+					setCBat(data);
+				})
+			);
+		
+			fetch(`/player/${e[0]}/pitching`).then((res) =>
+				res.json().then((data) => {
+					setCPitch(data);
+				})
+			);
+
+	}
+	
+	function handleCompTeam(e){
+		//console.log(e)
+		setCVisible("players")
+		fetch(`/teams/${e}`).then((res) =>
+			res.json().then((data) => {
+				setCRoster(data);
+			})
+		);
+	}
 	
     return (
         <div className="App">
@@ -87,10 +133,13 @@ export default function App() {
 				<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
 			}
 			{visible === "stats" && 
-				<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} handleCompare={handleCompare}/>
+				<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
+					TeamSelector={<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleCompTeam}/>}
+					PlayerSelector={<PlayerSelector roster={compRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
+				/>
 			}
 			{visible === "compare" &&
-				<Comparison handleBack={handleBack} />
+				<Comparison handleBack={handleCompBack} Img={img} Name={playerName} Pos={playerPos} BattingStats={bat} PitchingStats={pitch} CImg={compImg} CName={compName} CPos={compPos} CBattingStats={compBat} CPitchingStats={compPitch}/>
 			}
 			<footer>
 				© 2025 MLB Advanced Media, LP. All rights reserved. Webapp created and used only for educational non-commercial purposes. 

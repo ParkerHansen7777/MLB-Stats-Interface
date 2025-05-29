@@ -98,6 +98,9 @@ footer{
   justify-items: center;
 }
 
+.popup-overlay{
+  background: rgba(0, 0, 0, 0.5);
+}
 
 .stats-headshot{
   display: block;
