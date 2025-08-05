@@ -46,8 +46,8 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 	
 	function handleCompare(close){
 		return(
-		<div>
-			<div>
+		<div className="c-container">
+			<div className="c-content">
 				{visible === "teams" &&
 					TeamSelector
 				}
@@ -66,7 +66,7 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
     return(
         <>
 				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-				<Popup trigger=
+				<Popup className="selector" trigger=
 				{<button className="btn btn-success">Compare</button>}
 				modal nested>
 					{
