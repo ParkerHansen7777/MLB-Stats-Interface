@@ -122,13 +122,16 @@ export default function App() {
 		);
 	}
 	
+	let connected;
+	if(teams === []){
+		connected = <h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>
+	}
+
     return (
         <div className="App">
             <div className="header"><h1>MLB Stats API</h1></div>
 			
-			{ this.state.teams === [] && 
-				<h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>
-			}
+			{connected}
 
 			{visible === "teams" && 
 				<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
