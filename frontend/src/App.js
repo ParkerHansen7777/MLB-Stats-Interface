@@ -122,10 +122,7 @@ export default function App() {
 		);
 	}
 	
-	let connected;
-	if(teams.state === []){
-		connected = <h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>
-	}
+	
 
     return (
         <div className="App">
