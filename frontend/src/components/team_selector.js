@@ -29,13 +29,10 @@ export default function TeamSelector({handleTeam, Teams, setTeams}){
 		</div>
 	);
 
-    let connected;
-	if(Teams === []){
-		connected = <h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>
-	}
+    
     return(
         <>
-			{connected}
+			{Teams === [] && <h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>}
             <span>Choose a Team</span>
 			<div className="grid-container">
 				{teamList(Teams)}
