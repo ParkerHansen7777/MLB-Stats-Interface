@@ -3,11 +3,14 @@ from operator import itemgetter
 #import statsapi
 import requests
 #import datetime
+from flask_cors import CORS, cross_origin
 
 #x = datetime.datetime.now()
 
 # Initializing flask app
 app = Flask(__name__)
+cors = CORS(app) # allow CORS for all domains on all routes.
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 # Route for seeing a data
