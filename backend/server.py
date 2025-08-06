@@ -10,11 +10,6 @@ import requests
 app = Flask(__name__)
 
 
-@app.route('/')
-@app.route('/<int:id>')
-def index(id=0):
-    return render_template("index.html")
-
 # Route for seeing a data
 @app.route('/teams')
 def get_teams():
@@ -83,4 +78,4 @@ def get_player_pitching_stats(id):
     
 # Running app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5100)
