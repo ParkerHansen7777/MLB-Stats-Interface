@@ -127,8 +127,6 @@ export default function App() {
     return (
         <div className="App">
             <div className="header"><h1>MLB Stats API</h1></div>
-			
-			{connected}
 
 			{visible === "teams" && 
 				<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
