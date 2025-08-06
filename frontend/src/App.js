@@ -31,7 +31,7 @@ export default function App() {
 	function handleTeam(e){
 		//console.log(e)
 		setVisible("players")
-		fetch(`/teams/${e}`).then((res) =>
+		fetch(`https://mlb-stats-interface-backend.onrender.com/teams/${e}`).then((res) =>
 			res.json().then((data) => {
 				setRoster(data);
 			})
