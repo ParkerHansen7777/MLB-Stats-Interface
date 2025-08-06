@@ -46,13 +46,13 @@ export default function App() {
 		setName(e[2])
 		
 		
-			fetch(`/player/${e[0]}/hitting`).then((res) =>
+			fetch(`https://mlb-stats-interface-backend.onrender.com//player/${e[0]}/hitting`).then((res) =>
 				res.json().then((data) => {
 					setBat(data);
 				})
 			);
 		
-			fetch(`/player/${e[0]}/pitching`).then((res) =>
+			fetch(`https://mlb-stats-interface-backend.onrender.com//player/${e[0]}/pitching`).then((res) =>
 				res.json().then((data) => {
 					setPitch(data);
 				})
@@ -98,13 +98,13 @@ export default function App() {
 		setCName(e[2])
 		
 		
-			fetch(`/player/${e[0]}/hitting`).then((res) =>
+			fetch(`https://mlb-stats-interface-backend.onrender.com//player/${e[0]}/hitting`).then((res) =>
 				res.json().then((data) => {
 					setCBat(data);
 				})
 			);
 		
-			fetch(`/player/${e[0]}/pitching`).then((res) =>
+			fetch(`https://mlb-stats-interface-backend.onrender.com//player/${e[0]}/pitching`).then((res) =>
 				res.json().then((data) => {
 					setCPitch(data);
 				})
@@ -115,7 +115,7 @@ export default function App() {
 	function handleCompTeam(e){
 		//console.log(e)
 		setCVisible("players")
-		fetch(`/teams/${e}`).then((res) =>
+		fetch(`https://mlb-stats-interface-backend.onrender.com//teams/${e}`).then((res) =>
 			res.json().then((data) => {
 				setCRoster(data);
 			})
