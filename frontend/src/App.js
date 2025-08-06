@@ -126,6 +126,10 @@ export default function App() {
         <div className="App">
             <div className="header"><h1>MLB Stats API</h1></div>
 			
+			{ teams === [] && 
+				<h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>
+			}
+
 			{visible === "teams" && 
 				<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
 			}
