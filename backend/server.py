@@ -3,15 +3,19 @@ from operator import itemgetter
 #import statsapi
 import requests
 #import datetime
+from flask_cors import CORS, cross_origin
 
 #x = datetime.datetime.now()
 
 # Initializing flask app
 app = Flask(__name__)
+cors = CORS(app) # allow CORS for all domains on all routes.
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 # Route for seeing a data
 @app.route('/teams')
+@cross_origin()
 def get_teams():
     
     
@@ -30,6 +34,7 @@ def get_teams():
     return data
 
 @app.route('/teams/<id>')
+@cross_origin()
 def get_roster(id):
 
     req = requests.get(
@@ -45,6 +50,7 @@ def get_roster(id):
     return data
     
 @app.route('/player/<id>/hitting')
+@cross_origin()
 def get_player_hitting_stats(id):
 
     req = requests.get(
@@ -60,6 +66,7 @@ def get_player_hitting_stats(id):
         return req
     
 @app.route('/player/<id>/pitching')
+@cross_origin()
 def get_player_pitching_stats(id):
 
     req = requests.get(
