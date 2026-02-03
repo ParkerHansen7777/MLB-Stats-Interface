@@ -6,7 +6,7 @@ export default function TeamSelector({handleTeam, Teams, setTeams}){
     useEffect(() => {
         // Using fetch to fetch the api from 
         // flask server it will be redirected to proxy
-        fetch("/teams").then((res) =>
+        fetch("https://mlb-stats-interface-backend.onrender.com/teams").then((res) =>
             res.json().then((data) => {
                 // Setting a data from api
                 //console.log(data);
@@ -29,9 +29,12 @@ export default function TeamSelector({handleTeam, Teams, setTeams}){
 		</div>
 	);
 
+    
     return(
         <>
-			<span>Choose a Team</span>
+			{console.log(Teams)}
+            {Teams.length === 0 && <h3>Please wait and or refresh after two minutes while the backend (hosted for free) spins up to populate the page, thanks.</h3>}
+            <span>Choose a Team</span>
 			<div className="grid-container">
 				{teamList(Teams)}
 			</div>
