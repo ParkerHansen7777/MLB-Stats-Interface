@@ -122,29 +122,30 @@ export default function App() {
 		);
 	}
 	
-    return (
-        <div className="App">
-            <div className="header"><h1>MLB Stats API</h1></div>
-			
-			{visible === "teams" && 
-				<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
-			}
-			{visible === "players" &&
-				<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
-			}
-			{visible === "stats" && 
-				<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
-					TeamSelector={<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleCompTeam}/>}
-					PlayerSelector={<PlayerSelector roster={compRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
-				/>
-			}
-			{visible === "compare" &&
-				<Comparison handleBack={handleCompBack} Img={img} Name={playerName} Pos={playerPos} BattingStats={bat} PitchingStats={pitch} CImg={compImg} CName={compName} CPos={compPos} CBattingStats={compBat} CPitchingStats={compPitch}/>
-			}
+	return (
+		<div className="App">
+			<div className="header"><h1>MLB Stats API</h1></div>
+			<div className="main">
+				{visible === "teams" && 
+					<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
+				}
+				{visible === "players" &&
+					<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
+				}
+				{visible === "stats" && 
+					<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
+						TeamSelector={<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleCompTeam}/>}
+						PlayerSelector={<PlayerSelector roster={compRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
+					/>
+				}
+				{visible === "compare" &&
+					<Comparison handleBack={handleCompBack} Img={img} Name={playerName} Pos={playerPos} BattingStats={bat} PitchingStats={pitch} CImg={compImg} CName={compName} CPos={compPos} CBattingStats={compBat} CPitchingStats={compPitch}/>
+				}
+			</div>
 			<footer>
 				© 2025 MLB Advanced Media, LP. All rights reserved. Webapp created and used only for educational non-commercial purposes. 
 			</footer>
-        </div>
-    );
+		</div>
+	);
 }
 
