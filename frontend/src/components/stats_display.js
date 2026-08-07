@@ -3,11 +3,16 @@ import Popup from 'reactjs-popup'
 //import 'reactjs-popup/dist/index.css';
 
 
-export default function StatsDisplay({handleBack, BattingStats, PitchingStats, Img, PlayerName, PlayerPos, visible, TeamSelector, PlayerSelector}){
+export default function StatsDisplay({handleBack, BattingStats, PitchingStats, FieldingStats, Img, PlayerName, PlayerPos, visible, TeamSelector, PlayerSelector}){
 
     
     const Bat = props => (
         <>
+		<span>{props.stat.gamesPlayed}</span>
+		<span>{props.stat.hits}</span>
+		<span>{props.stat.atBats}</span>
+		<span>{props.stat.strikeOuts}</span>
+		<span>{props.stat.baseOnBalls}</span>
 		<span>{props.stat.avg}</span>
 		<span>{props.stat.obp}</span>
 		<span>{props.stat.slg}</span>
@@ -20,29 +25,44 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
     
     const Pitch = props => (
         <>
-		<span>{props.stat.gamesPlayed}</span>
+		<span>{props.stat.gamesPitched}</span>
+		<span>{props.stat.gamesStarted}</span>
 		<span>{props.stat.wins}</span>
 		<span>{props.stat.losses}</span>
-		<span>{props.stat.era}</span>
-		<span>{props.stat.whip}</span>
 		<span>{props.stat.inningsPitched}</span>
+		<span>{props.stat.earnedRuns}</span>
+		<span>{props.stat.era}</span>
+		<span>{props.stat.strikeOuts}</span>
+		<span>{props.stat.baseOnBalls}</span>
+		<span>{props.stat.whip}</span>
 		</>
     );
-    
+
+
+    const Field = props => (
+		<>
+		<span>{props.stat.position?.name}</span>
+		<span>{props.stat.assists}</span>
+		<span>{props.stat.putOuts}</span>
+		<span>{props.stat.errors}</span>
+		<span>{props.stat.fielding}</span>
+		</>
+	);
     
     
     function batLine(bat){
-		//console.log(bat)
 		return <Bat stat={bat} />;
 		
 	}
 	
 	function pitchLine(pitch){
-		//console.log(pitch)
 		return <Pitch stat={pitch} />
 		
 	}
 
+	function fieldLine(field){
+		return <Field stat={field} />
+	}
 	
 	function handleCompare(close){
 		return(
@@ -81,16 +101,21 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
             			<div className="player-name">{PlayerPos}</div>
 					</div>
 					
-						{BattingStats.length !== 0 && 
+						{(BattingStats.length !== 0 && BattingStats.atBats !== 0) && 
 						<div className="container-col">
 							<h2>Hitting Stats</h2>
 							<div className="container-row">
 								<div className="container-col">
-									<span>AVG</span>
-									<span>OBP</span>
-									<span>SLG</span>
-									<span>OPS</span>
-									<span>HR</span>
+									<span>Games Played</span>
+									<span>Hits</span>
+									<span>At Bats</span>
+									<span>Strikeouts</span>
+									<span>Walks</span>
+									<span>Batting Average</span>
+									<span>On-base Percentage</span>
+									<span>Slugging Percentage</span>
+									<span>On-base Plus Slugging (OPS)</span>
+									<span>Home Runs</span>
 								</div>
 								<div className="container-col">
 									{batLine(BattingStats)}
@@ -103,17 +128,36 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, I
 							<div className="container-row">
 								<div className="container-col">
 									<span>Games Played</span>
+									<span>Games Started</span>
 									<span>Wins</span>
 									<span>Loses</span>
-									<span>ERA</span>
-									<span>WHIP</span>
 									<span>Innings Pitched</span>
+									<span>Earned Runs</span>
+									<span>Earned Run Average (ERA)</span>
+									<span>Strikeouts</span>
+									<span>Walks</span>
+									<span>Walks and Hits per Inning Pitched (WHIP)</span>
 								</div>
 								<div className="container-col">
 									{pitchLine(PitchingStats)}
 								</div>
 							</div>
 						</div>}
+						<div className="container-col">
+							<h2>Fielding Stats</h2>
+							<div className="container-row">
+								<div className="container-col">
+									<span>Position</span>
+									<span>Assists</span>
+									<span>Put Outs</span>
+									<span>Errors</span>
+									<span>Fielding Percentage</span>
+								</div>
+								<div className="container-col">
+									{fieldLine(FieldingStats)}
+								</div>
+							</div>
+						</div>
 				</div>
 			</>
     )

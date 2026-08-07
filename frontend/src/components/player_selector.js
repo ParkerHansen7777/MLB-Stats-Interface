@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function PlayerSelector({handlePlayer, handleBack, roster}){
+export default function PlayerSelector({handleRoster,handlePlayer, handleBack, roster}){
     
     
     
@@ -41,7 +41,13 @@ export default function PlayerSelector({handlePlayer, handleBack, roster}){
     return (
         <>
             <button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-            <span>Choose a player from the active roster</span>
+            <span>Choose a roster type</span>
+            <select name="rosterType" id="rosterType" onChange={(e) => handleRoster(e.target.value)}>
+                <option value="">Select a roster</option>
+                <option value="active">Active Roster</option>
+                <option value="40Man">40-Man Roster</option>
+            </select>
+            <span>Choose a player from the selected roster</span>
             <div className="container-row">
                 <div className="grid-container" style={{gridTemplateColumns: "repeat(3, 15vh)"}}>
                     {pitcherList(roster)}

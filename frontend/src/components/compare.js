@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function Comparison({handleBack, Img, Name, Pos, BattingStats, PitchingStats, CImg, CName, CPos, CBattingStats, CPitchingStats}){
 
     

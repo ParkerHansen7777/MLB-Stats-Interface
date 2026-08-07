@@ -11,10 +11,12 @@ import Comparison from "./components/compare";
 export default function App() {
     
 	const [visible, setVisible] = useState("teams")
+	const [team, setTeam] = useState("")
 	const [teams, setTeams] = useState([]);
 	const [roster, setRoster] = useState([]);
 	const [bat, setBat] = useState([]);
 	const [pitch, setPitch] = useState([]);
+	const [field, setField] = useState([]);
 	const [img, setImg] = useState("");
 	const [playerName, setName] = useState("");
 	const [playerPos, setPos] = useState("");
@@ -30,15 +32,19 @@ export default function App() {
 
 	function handleTeam(e){
 		//console.log(e)
+		setTeam(e)
 		setVisible("players")
-		fetch(`${process.env.REACT_APP_HOSTNAME}/teams/${e}`).then((res) =>
+		
+	}
+
+	function handleRoster(e){
+		fetch(`${process.env.REACT_APP_HOSTNAME}/teams/${team}/${e}`).then((res) =>
 			res.json().then((data) => {
 				setRoster(data);
 			})
 		);
 	}
-
-	
+		
 	function handlePlayer(e){
 		setVisible("stats")
 		setImg(`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${e[0]}/headshot/67/current`)
@@ -57,12 +63,20 @@ export default function App() {
 					setPitch(data);
 				})
 			);
+
+			fetch(`${process.env.REACT_APP_HOSTNAME}/player/${e[0]}/fielding`).then((res) =>
+				res.json().then((data) => {
+					setField(data);
+				})
+			);
+					
 		
 	}
 
 	function handleBack(){
 		if (visible === "players"){
 			setRoster([])
+			setTeam("")
 			setVisible("teams")
 		}
 		else if (visible === "stats"){
@@ -113,7 +127,6 @@ export default function App() {
 	}
 	
 	function handleCompTeam(e){
-		//console.log(e)
 		setCVisible("players")
 		fetch(`${process.env.REACT_APP_HOSTNAME}/teams/${e}`).then((res) =>
 			res.json().then((data) => {
@@ -130,10 +143,10 @@ export default function App() {
 					<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleTeam}/>
 				}
 				{visible === "players" &&
-					<PlayerSelector roster={roster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
+					<PlayerSelector roster={roster} handleRoster={handleRoster} handlePlayer={handlePlayer} handleBack={handleBack} /> 
 				}
 				{visible === "stats" && 
-					<StatsDisplay BattingStats={bat} PitchingStats={pitch} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
+					<StatsDisplay BattingStats={bat} PitchingStats={pitch} FieldingStats={field} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
 						TeamSelector={<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleCompTeam}/>}
 						PlayerSelector={<PlayerSelector roster={compRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
 					/>
