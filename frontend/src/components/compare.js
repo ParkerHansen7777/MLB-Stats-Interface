@@ -1,40 +1,7 @@
+import { batLine, pitchLine } from "../utils/stats_helper.js"
+
 export default function Comparison({handleBack, Img, Name, Pos, BattingStats, PitchingStats, CImg, CName, CPos, CBattingStats, CPitchingStats}){
 
-    
-    const Bat = props => (
-        <>
-		<span>{props.stat.avg}</span>
-		<span>{props.stat.obp}</span>
-		<span>{props.stat.slg}</span>
-		<span>{props.stat.ops}</span>
-		<span>{props.stat.homeRuns}</span>
-		</>
-		
-    );
-    
-    
-    const Pitch = props => (
-        <>
-		<span>{props.stat.gamesPlayed}</span>
-		<span>{props.stat.wins}</span>
-		<span>{props.stat.losses}</span>
-		<span>{props.stat.era}</span>
-		<span>{props.stat.whip}</span>
-		<span>{props.stat.inningsPitched}</span>
-		</>
-    );
-    
-    
-    
-    function batLine(bat){
-		//console.log(bat)
-		return <Bat stat={bat} />;
-	}
-	
-	function pitchLine(pitch){
-		//console.log(pitch)
-		return <Pitch stat={pitch} />
-	}
     
     return(
         <>

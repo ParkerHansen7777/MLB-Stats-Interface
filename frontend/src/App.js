@@ -22,6 +22,7 @@ export default function App() {
 	const [playerPos, setPos] = useState("");
 
 	const [compVisible, setCVisible] = useState("teams")
+	const [compTeam, setCTeam] = useState("")
 	const [compRoster, setCRoster] = useState([])
 	const [compImg, setCImg] = useState("")
 	const [compName, setCName] = useState("")
@@ -31,7 +32,6 @@ export default function App() {
 
 
 	function handleTeam(e){
-		//console.log(e)
 		setTeam(e)
 		setVisible("players")
 		
@@ -104,6 +104,14 @@ export default function App() {
 		setCName("")
 		setCPos("")
 	}
+
+	function handleCompRoster(e){
+		fetch(`${process.env.REACT_APP_HOSTNAME}/teams/${compTeam}/${e}`).then((res) =>
+			res.json().then((data) => {
+				setCRoster(data);
+			})
+		);
+	}
 	
 	function handleCompPlayer(e){
 		setVisible("compare")
@@ -127,12 +135,9 @@ export default function App() {
 	}
 	
 	function handleCompTeam(e){
+		setCTeam(e)
 		setCVisible("players")
-		fetch(`${process.env.REACT_APP_HOSTNAME}/teams/${e}`).then((res) =>
-			res.json().then((data) => {
-				setCRoster(data);
-			})
-		);
+		
 	}
 	
 	return (
@@ -148,7 +153,7 @@ export default function App() {
 				{visible === "stats" && 
 					<StatsDisplay BattingStats={bat} PitchingStats={pitch} FieldingStats={field} handleBack={handleBack} Img={img} PlayerName={playerName} PlayerPos={playerPos} visible={compVisible} 
 						TeamSelector={<TeamSelector Teams={teams} setTeams={setTeams} handleTeam={handleCompTeam}/>}
-						PlayerSelector={<PlayerSelector roster={compRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
+						PlayerSelector={<PlayerSelector roster={compRoster} handleRoster={handleCompRoster} handlePlayer={handleCompPlayer} handleBack={handleCompBack}/>} 
 					/>
 				}
 				{visible === "compare" &&

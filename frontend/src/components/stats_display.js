@@ -1,69 +1,11 @@
 import React from "react"
 import Popup from 'reactjs-popup'
+import { batLine, pitchLine, fieldLine } from "../utils/stats_helper.js"
 //import 'reactjs-popup/dist/index.css';
 
 
 export default function StatsDisplay({handleBack, BattingStats, PitchingStats, FieldingStats, Img, PlayerName, PlayerPos, visible, TeamSelector, PlayerSelector}){
 
-    
-    const Bat = props => (
-        <>
-		<span>{props.stat.gamesPlayed}</span>
-		<span>{props.stat.hits}</span>
-		<span>{props.stat.atBats}</span>
-		<span>{props.stat.strikeOuts}</span>
-		<span>{props.stat.baseOnBalls}</span>
-		<span>{props.stat.avg}</span>
-		<span>{props.stat.obp}</span>
-		<span>{props.stat.slg}</span>
-		<span>{props.stat.ops}</span>
-		<span>{props.stat.homeRuns}</span>
-		</>
-		
-    );
-    
-    
-    const Pitch = props => (
-        <>
-		<span>{props.stat.gamesPitched}</span>
-		<span>{props.stat.gamesStarted}</span>
-		<span>{props.stat.wins}</span>
-		<span>{props.stat.losses}</span>
-		<span>{props.stat.inningsPitched}</span>
-		<span>{props.stat.earnedRuns}</span>
-		<span>{props.stat.era}</span>
-		<span>{props.stat.strikeOuts}</span>
-		<span>{props.stat.baseOnBalls}</span>
-		<span>{props.stat.whip}</span>
-		</>
-    );
-
-
-    const Field = props => (
-		<>
-		<span>{props.stat.position?.name}</span>
-		<span>{props.stat.assists}</span>
-		<span>{props.stat.putOuts}</span>
-		<span>{props.stat.errors}</span>
-		<span>{props.stat.fielding}</span>
-		</>
-	);
-    
-    
-    function batLine(bat){
-		return <Bat stat={bat} />;
-		
-	}
-	
-	function pitchLine(pitch){
-		return <Pitch stat={pitch} />
-		
-	}
-
-	function fieldLine(field){
-		return <Field stat={field} />
-	}
-	
 	function handleCompare(close){
 		return(
 		<div className="c-container">
@@ -76,7 +18,7 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, F
 				}
 			</div>
 			<div>
-				<button onClick={() => close() }>Close modal</button>
+				<button onClick={() => close() }>Close comparison</button>
 			</div>
 		</div>
 		)
