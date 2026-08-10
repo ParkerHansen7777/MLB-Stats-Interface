@@ -54,5 +54,6 @@ export function pitchLine(pitch){
 }
 
 export function fieldLine(field){
+    console.log(field)
     return <Field stat={field} />
 }

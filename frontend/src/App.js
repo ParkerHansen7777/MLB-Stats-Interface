@@ -29,6 +29,7 @@ export default function App() {
 	const [compPos, setCPos] = useState("")
 	const [compBat, setCBat] = useState([])
 	const [compPitch, setCPitch] = useState([])
+	const [compField, setCField] = useState([])
 
 
 	function handleTeam(e){
@@ -82,6 +83,7 @@ export default function App() {
 		else if (visible === "stats"){
 			setBat([])
 			setPitch([])
+			setField([])
 			setVisible("players")
 			setImg("")
 			setName("")
@@ -100,6 +102,7 @@ export default function App() {
 		setCRoster([])
 		setCBat([])
 		setCPitch([])
+		setCField([])
 		setCImg("")
 		setCName("")
 		setCPos("")
@@ -157,7 +160,7 @@ export default function App() {
 					/>
 				}
 				{visible === "compare" &&
-					<Comparison handleBack={handleCompBack} Img={img} Name={playerName} Pos={playerPos} BattingStats={bat} PitchingStats={pitch} CImg={compImg} CName={compName} CPos={compPos} CBattingStats={compBat} CPitchingStats={compPitch}/>
+					<Comparison handleBack={handleCompBack} Img={img} Name={playerName} Pos={playerPos} BattingStats={bat} PitchingStats={pitch} FieldingStats={field} CImg={compImg} CName={compName} CPos={compPos} CBattingStats={compBat} CPitchingStats={compPitch} CFieldingStats={compField}/>
 				}
 			</div>
 			<footer>
