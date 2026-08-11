@@ -27,23 +27,23 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, F
 
     return(
         <>
-				<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
-				<Popup className="selector" trigger=
+			<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
+			<Popup className="selector" trigger=
 				{<button className="btn btn-success">Compare</button>}
 				modal nested>
 					{
 					close => (
 					handleCompare(close)
 				)}
-				</Popup>
-				<div className="container-row">
-					<div className="playercard">
-						<img className="stats-headshot"src={Img} alt=""/>
-						<div className="player-name">{PlayerName}</div>
-            			<div className="player-name">{PlayerPos}</div>
-					</div>
-					<StatLine name={PlayerName} BattingStats={BattingStats} PitchingStats={PitchingStats} FieldingStats={FieldingStats}/>
+			</Popup>
+			<div className="container-row">
+				<div className="playercard">
+					<img className="stats-headshot"src={Img} alt=""/>
+					<div className="player-name">{PlayerName}</div>
+					<div className="player-name">{PlayerPos}</div>
 				</div>
-			</>
+				<StatLine name={PlayerName} BattingStats={BattingStats} PitchingStats={PitchingStats} FieldingStats={FieldingStats}/>
+			</div>
+		</>
     )
 }

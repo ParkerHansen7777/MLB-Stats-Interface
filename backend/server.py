@@ -46,7 +46,7 @@ def get_active_roster(id):
     
     
     for dic in req:
-        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"]})
+        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"], "status": dic["status"]["description"]})
     return data
 
 @app.route('/teams/<id>/40Man')
@@ -62,7 +62,7 @@ def get_40man_roster(id):
     
     
     for dic in req:
-        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"]})
+        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"], "status": dic["status"]["description"]})
     return data
     
 @app.route('/player/<id>/hitting')

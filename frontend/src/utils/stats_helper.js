@@ -1,16 +1,16 @@
 
 const Bat = props => (
     <>
-    <span>{props.stat.gamesPlayed}</span>
-    <span>{props.stat.hits}</span>
-    <span>{props.stat.atBats}</span>
-    <span>{props.stat.strikeOuts}</span>
-    <span>{props.stat.baseOnBalls}</span>
-    <span>{props.stat.avg}</span>
-    <span>{props.stat.obp}</span>
-    <span>{props.stat.slg}</span>
-    <span>{props.stat.ops}</span>
-    <span>{props.stat.homeRuns}</span>
+    <td>{props.stat.gamesPlayed}</td>
+    <td>{props.stat.hits}</td>
+    <td>{props.stat.atBats}</td>
+    <td>{props.stat.strikeOuts}</td>
+    <td>{props.stat.baseOnBalls}</td>
+    <td>{props.stat.avg}</td>
+    <td>{props.stat.obp}</td>
+    <td>{props.stat.slg}</td>
+    <td>{props.stat.ops}</td>
+    <td>{props.stat.homeRuns}</td>
     </>
     
 );
@@ -18,27 +18,27 @@ const Bat = props => (
 
 const Pitch = props => (
     <>
-    <span>{props.stat.gamesPitched}</span>
-    <span>{props.stat.gamesStarted}</span>
-    <span>{props.stat.wins}</span>
-    <span>{props.stat.losses}</span>
-    <span>{props.stat.inningsPitched}</span>
-    <span>{props.stat.earnedRuns}</span>
-    <span>{props.stat.era}</span>
-    <span>{props.stat.strikeOuts}</span>
-    <span>{props.stat.baseOnBalls}</span>
-    <span>{props.stat.whip}</span>
+    <td>{props.stat.gamesPitched}</td>
+    <td>{props.stat.gamesStarted}</td>
+    <td>{props.stat.wins}</td>
+    <td>{props.stat.losses}</td>
+    <td>{props.stat.inningsPitched}</td>
+    <td>{props.stat.earnedRuns}</td>
+    <td>{props.stat.era}</td>
+    <td>{props.stat.strikeOuts}</td>
+    <td>{props.stat.baseOnBalls}</td>
+    <td>{props.stat.whip}</td>
     </>
 );
 
 
 const Field = props => (
     <>
-    <span>{props.stat.position?.name}</span>
-    <span>{props.stat.assists}</span>
-    <span>{props.stat.putOuts}</span>
-    <span>{props.stat.errors}</span>
-    <span>{props.stat.fielding}</span>
+    <td>{props.stat.position?.name}</td>
+    <td>{props.stat.assists}</td>
+    <td>{props.stat.putOuts}</td>
+    <td>{props.stat.errors}</td>
+    <td>{props.stat.fielding}</td>
     </>
 );
 
@@ -54,6 +54,6 @@ export function pitchLine(pitch){
 }
 
 export function fieldLine(field){
-    console.log(field)
+    //console.log(field)
     return <Field stat={field} />
 }
