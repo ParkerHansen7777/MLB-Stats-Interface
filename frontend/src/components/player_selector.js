@@ -6,7 +6,7 @@ export default function PlayerSelector({handleRoster,handlePlayer, handleBack, r
     
     
     const Player = props => (
-		<div className="button" value={[props.player.id, props.player.pos]} style={{ backgroundColor: props.color }}> 
+		<div className="button" value={[props.player.id, props.player.pos]} style={{ backgroundColor: props.color }} onClick={() => handlePlayer([props.player.id, props.player.pos, props.player.name])}>
             <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${props.player.id}/headshot/67/current`} alt=""/>
 			<div>{props.player.name}</div>
             <div>{props.player.pos}</div>
