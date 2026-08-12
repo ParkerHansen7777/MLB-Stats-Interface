@@ -1,12 +1,19 @@
+import React from "react"
 import { batLine, pitchLine, fieldLine } from "../utils/stats_helper.js"
     
 export default function StatLine({name, BattingStats, PitchingStats, FieldingStats}){
     //console.log({name, BattingStats, PitchingStats, FieldingStats})
+    const [toggleHitting, setToggleHitting] = React.useState(false)
+    const [togglePitching, setTogglePitching] = React.useState(false)
+    const [toggleFielding, setToggleFielding] = React.useState(false)
+    
     return(
         
         <div className="container-col">
         {(BattingStats.length !== 0 && BattingStats.atBats !== 0) && 
         
+        <button onClick={() => setToggleHitting(!toggleHitting)}>Show Hitting Stats</button> }
+            {toggleHitting &&
             <div className="container-col">
                 <h2> {name}'s Hitting Stats</h2>
                 <table className="stats-table">
@@ -31,8 +38,11 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
                     </tbody>
                 </table>
             </div>}
+        
             
             {PitchingStats.length !== 0 && 
+            <button onClick={() => setTogglePitching(!togglePitching)}>Show Pitching Stats</button>}
+            {togglePitching &&
             <div className="container-col">
                 <h2> {name}'s Pitching Stats</h2>
                 <table className="stats-table">
@@ -60,6 +70,9 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
             
             
             <div className="container-col">
+                <button onClick={() => setToggleFielding(!toggleFielding)}>Show Fielding Stats</button>
+                {toggleFielding &&
+                <>
                 <h2> {name}'s Fielding Stats</h2>
                 <table className="stats-table">
                     <thead>
@@ -77,7 +90,8 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
                         </tr>
                     </tbody>
                 </table>
-            
+                </>
+}
             </div>
         </div>
         

@@ -27,7 +27,7 @@ export default function StatsDisplay({handleBack, BattingStats, PitchingStats, F
 
     return(
         <>
-			<button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
+			<button className="btn btn-primary" onClick={handleBack}>Back</button>
 			<Popup className="selector" trigger=
 				{<button className="btn btn-success">Compare</button>}
 				modal nested>
