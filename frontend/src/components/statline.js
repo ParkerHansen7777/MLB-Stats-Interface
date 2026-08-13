@@ -1,99 +1,72 @@
 import React from "react"
-import { batLine, pitchLine, fieldLine } from "../utils/stats_helper.js"
     
-export default function StatLine({name, BattingStats, PitchingStats, FieldingStats}){
-    //console.log({name, BattingStats, PitchingStats, FieldingStats})
+export default function StatLine({name, BattingStats, PitchingStats, FieldingStats, TeamColor}){
     const [toggleHitting, setToggleHitting] = React.useState(false)
     const [togglePitching, setTogglePitching] = React.useState(false)
     const [toggleFielding, setToggleFielding] = React.useState(false)
     
     return(
-        
-        <div className="container-col">
+        <div className="container-col" id="statline" style={{ '--team-color': TeamColor || 'var(--mlb-green)'}}>
         {(BattingStats.length !== 0 && BattingStats.atBats !== 0) && 
-        
-        <button onClick={() => setToggleHitting(!toggleHitting)}>Show Hitting Stats</button> }
+        <button className="btn btn-hitting" onClick={() => setToggleHitting(!toggleHitting)}>Show Hitting Stats</button> }
             {toggleHitting &&
             <div className="container-col">
                 <h2> {name}'s Hitting Stats</h2>
-                <table className="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Games Played</th>
-                            <th>Hits</th>
-                            <th>At Bats</th>
-                            <th>Strikeouts</th>
-                            <th>Walks</th>
-                            <th>Batting Average</th>
-                            <th>On-base Percentage</th>
-                            <th>Slugging Percentage</th>
-                            <th>On-base Plus Slugging (OPS)</th>
-                            <th>Home Runs</th>
-                        </tr>
-                    </thead>
+                <table className="stats-table vertical-table">
                     <tbody>
-                        <tr>
-                            {batLine(BattingStats)}
-                        </tr>
+                        <tr><th>Games Played</th><td>{BattingStats.gamesPlayed ?? "-"}</td></tr>
+                        <tr><th>Hits</th><td>{BattingStats.hits ?? "-"}</td></tr>
+                        <tr><th>At Bats</th><td>{BattingStats.atBats ?? "-"}</td></tr>
+                        <tr><th>Strikeouts</th><td>{BattingStats.strikeOuts ?? "-"}</td></tr>
+                        <tr><th>Walks</th><td>{BattingStats.baseOnBalls ?? "-"}</td></tr>
+                        <tr><th>Batting Average</th><td>{BattingStats.avg ?? "-"}</td></tr>
+                        <tr><th>On-base Percentage</th><td>{BattingStats.obp ?? "-"}</td></tr>
+                        <tr><th>Slugging Percentage</th><td>{BattingStats.slg ?? "-"}</td></tr>
+                        <tr><th>On-base Plus Slugging (OPS)</th><td>{BattingStats.ops ?? "-"}</td></tr>
+                        <tr><th>Home Runs</th><td>{BattingStats.homeRuns ?? "-"}</td></tr>
                     </tbody>
                 </table>
             </div>}
         
-            
             {PitchingStats.length !== 0 && 
-            <button onClick={() => setTogglePitching(!togglePitching)}>Show Pitching Stats</button>}
+            <button className="btn btn-pitching" onClick={() => setTogglePitching(!togglePitching)}>Show Pitching Stats</button>}
             {togglePitching &&
             <div className="container-col">
                 <h2> {name}'s Pitching Stats</h2>
-                <table className="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Games Played</th>
-                            <th>Games Started</th>
-                            <th>Wins</th>
-                            <th>Losses</th>
-                            <th>Innings Pitched</th>
-                            <th>Earned Runs</th>
-                            <th>Earned Run Average (ERA)</th>
-                            <th>Strikeouts</th>
-                            <th>Walks</th>
-                            <th>Walks and Hits per Inning Pitched (WHIP)</th>
-                        </tr>
-                    </thead>
+                <table className="stats-table vertical-table">
                     <tbody>
-                        <tr>
-                            {pitchLine(PitchingStats)}
-                        </tr>
+                        <tr><th>Games Played</th><td>{PitchingStats.gamesPitched ?? "-"}</td></tr>
+                        <tr><th>Games Started</th><td>{PitchingStats.gamesStarted ?? "-"}</td></tr>
+                        <tr><th>Wins</th><td>{PitchingStats.wins ?? "-"}</td></tr>
+                        <tr><th>Losses</th><td>{PitchingStats.losses ?? "-"}</td></tr>
+                        <tr><th>Innings Pitched</th><td>{PitchingStats.inningsPitched ?? "-"}</td></tr>
+                        <tr><th>Earned Runs</th><td>{PitchingStats.earnedRuns ?? "-"}</td></tr>
+                        <tr><th>Earned Run Average (ERA)</th><td>{PitchingStats.era ?? "-"}</td></tr>
+                        <tr><th>Strikeouts</th><td>{PitchingStats.strikeOuts ?? "-"}</td></tr>
+                        <tr><th>Walks</th><td>{PitchingStats.baseOnBalls ?? "-"}</td></tr>
+                        <tr><th>Walks and Hits per Inning Pitched (WHIP)</th><td>{PitchingStats.whip ?? "-"}</td></tr>
                     </tbody>
                 </table>
             </div>}
             
             
             <div className="container-col">
-                <button onClick={() => setToggleFielding(!toggleFielding)}>Show Fielding Stats</button>
+                <button className="btn btn-fielding" onClick={() => setToggleFielding(!toggleFielding)}>Show Fielding Stats</button>
                 {toggleFielding &&
                 <>
                 <h2> {name}'s Fielding Stats</h2>
-                <table className="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Position</th>
-                            <th>Assists</th>
-                            <th>Put Outs</th>
-                            <th>Errors</th>
-                            <th>Fielding Percentage</th>
-                        </tr>
-                    </thead>
+                <table className="stats-table vertical-table">
                     <tbody>
-                        <tr>
-                            {fieldLine(FieldingStats)}
-                        </tr>
+                        <tr><th>Position</th><td>{FieldingStats.position?.name ?? "-"}</td></tr>
+                        <tr><th>Assists</th><td>{FieldingStats.assists ?? "-"}</td></tr>
+                        <tr><th>Put Outs</th><td>{FieldingStats.putOuts ?? "-"}</td></tr>
+                        <tr><th>Errors</th><td>{FieldingStats.errors ?? "-"}</td></tr>
+                        <tr><th>Fielding Percentage</th><td>{FieldingStats.fielding ?? "-"}</td></tr>
                     </tbody>
                 </table>
                 </>
-}
+                }
             </div>
         </div>
-        
     )
 }
