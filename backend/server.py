@@ -33,12 +33,12 @@ def get_teams():
     data = sorted(data, key=itemgetter('name'))
     return data
 
-@app.route('/teams/<id>')
+@app.route('/teams/<id>/active')
 @cross_origin()
-def get_roster(id):
+def get_active_roster(id):
 
     req = requests.get(
-        "https://statsapi.mlb.com/api/v1/teams/" + id + "/roster"
+        "https://statsapi.mlb.com/api/v1/teams/" + id + "/roster/active"
     ).json()
     req = req["roster"]
     data = []
@@ -46,7 +46,23 @@ def get_roster(id):
     
     
     for dic in req:
-        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"]})
+        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"], "status": dic["status"]["description"]})
+    return data
+
+@app.route('/teams/<id>/40Man')
+@cross_origin()
+def get_40man_roster(id):
+
+    req = requests.get(
+        "https://statsapi.mlb.com/api/v1/teams/" + id + "/roster/40Man"
+    ).json()
+    req = req["roster"]
+    data = []
+    #return req
+    
+    
+    for dic in req:
+        data.append({"id": dic["person"]["id"], "name": dic["person"]["fullName"], "pos": dic["position"]["abbreviation"], "status": dic["status"]["description"]})
     return data
     
 @app.route('/player/<id>/hitting')
@@ -74,6 +90,23 @@ def get_player_pitching_stats(id):
     ).json()
     
     #extract pitching stats from request
+    #print(req)
+    if not req["stats"]:
+        return []
+    else:
+        req = req["stats"][0]["splits"][0]["stat"]
+
+        return req
+
+@app.route('/player/<id>/fielding')
+@cross_origin()
+def get_player_fielding_stats(id):
+
+    req = requests.get(
+        "http://statsapi.mlb.com/api/v1/people/" + id + "/stats?stats=season&group=fielding"
+    ).json()
+    
+    #extract fielding stats from request
     #print(req)
     if not req["stats"]:
         return []
