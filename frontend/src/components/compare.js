@@ -1,128 +1,54 @@
-import React from "react"
+import StatLine from "./statline"
 
-export default function Comparison({handleBack, Img, Name, Pos, BattingStats, PitchingStats, CImg, CName, CPos, CBattingStats, CPitchingStats}){
+const STATUS_COLORS = {
+    active: "#2e7d32",
+    minors: "#f4b400",
+    injured: "#d62f2f",
+    other: "#6b7280",
+};
 
-    
-    const Bat = props => (
-        <>
-		<span>{props.stat.avg}</span>
-		<span>{props.stat.obp}</span>
-		<span>{props.stat.slg}</span>
-		<span>{props.stat.ops}</span>
-		<span>{props.stat.homeRuns}</span>
-		</>
-		
+function normalizeStatus(status) {
+    const value = (status || "").toLowerCase();
+    if (!value) return "other";
+    if (value.includes("active") || value.includes("available") || value.includes("starter")) return "active";
+    if (value.includes("minor") || value.includes("aaa") || value.includes("aa") || value.includes("a+") || value.includes("a-")) return "minors";
+    if (value.includes("injured") || value.includes("disabled") || value.includes("dl") || value.includes("il")) return "injured";
+    return "other";
+}
+
+function StatusBadge({status, teamColor}) {
+    const currentStatus = status || "Status unavailable";
+    const statusType = normalizeStatus(currentStatus);
+
+    return (
+        <div className="player-status" style={{ '--team-color': teamColor || '#0E5F43' }}>
+            <span className="status-square" style={{ backgroundColor: STATUS_COLORS[statusType] || STATUS_COLORS.other }} />
+            <span className="player-status-text">{currentStatus}</span>
+        </div>
     );
-    
-    
-    const Pitch = props => (
-        <>
-		<span>{props.stat.gamesPlayed}</span>
-		<span>{props.stat.wins}</span>
-		<span>{props.stat.losses}</span>
-		<span>{props.stat.era}</span>
-		<span>{props.stat.whip}</span>
-		<span>{props.stat.inningsPitched}</span>
-		</>
-    );
-    
-    
-    
-    function batLine(bat){
-		//console.log(bat)
-		return <Bat stat={bat} />;
-	}
-	
-	function pitchLine(pitch){
-		//console.log(pitch)
-		return <Pitch stat={pitch} />
-	}
-    
+}
+
+export default function Comparison({handleBack, Img, Name, Pos, Status, TeamColor, BattingStats, PitchingStats, FieldingStats, CImg, CName, CPos, CStatus, CTeamColor, CBattingStats, CPitchingStats, CFieldingStats}){
     return(
         <>
             <button className="btn btn-primary" onClick={() => handleBack() }>Back</button>
             <div className="container-row" id="compare-row">
-                <div className="playercard">
+                <div className="playercard" style={{ '--team-color-top': TeamColor || '#0E5F43', '--team-color-bottom': (TeamColor === '#101010' ? '#FD5A1E' : TeamColor) || '#0E5F43' }}>
                     <img className="stats-headshot"src={Img} alt=""/>
-                    <div>{Name}</div>
-                    <div>{Pos}</div>
+                    <div className="player-name">{Name}</div>
+                    <div className="player-name">{Pos}</div>
+                    <StatusBadge status={Status} teamColor={TeamColor} />
                 </div>
                 
-                <div className="container-col">
-                    {PitchingStats.length !== 0 &&
-                    <>
-                    <h2>{Name}'s Pitching Stats</h2>
-                    <div className="container-row">
-                        <div className="container-col">
-                            <span>Games Played</span>
-                            <span>Wins</span>
-                            <span>Loses</span>
-                            <span>ERA</span>
-                            <span>WHIP</span>
-                            <span>Innings Pitched</span>
-                        </div>
-                        <div className="container-col">
-                            {pitchLine(PitchingStats)}
-                        </div>
-                    </div>
-                    </>}
-                    {BattingStats.length !== 0 &&
-                    <>
-                    <h2>{Name}'s Hitting Stats</h2>
-                    <div className="container-row">
-                        <div className="container-col">
-                            <span>AVG</span>
-                            <span>OBP</span>
-                            <span>SLG</span>
-                            <span>OPS</span>
-                            <span>HR</span>
-                        </div>
-                        <div className="container-col">
-                            {batLine(BattingStats)}
-                        </div>
-                    </div>
-                    </>}
-                </div>
-                <div id="statline" className="container-col">
-                    {CPitchingStats.length !== 0 &&
-                    <>
-                    <h2>{CName}'s Pitching Stats</h2>
-                    <div className="container-row">
-                        <div className="container-col">
-                            <span>Games Played</span>
-                            <span>Wins</span>
-                            <span>Loses</span>
-                            <span>ERA</span>
-                            <span>WHIP</span>
-                            <span>Innings Pitched</span>
-                        </div>
-                        <div className="container-col">
-                            {pitchLine(CPitchingStats)}
-                        </div>
-                    </div>
-                    </>}
-                    {CBattingStats.length !== 0 &&
-                    <>
-                    <h2>{CName}'s Hitting Stats</h2>
-                    <div className="container-row">
-                        <div className="container-col">
-                            <span>AVG</span>
-                            <span>OBP</span>
-                            <span>SLG</span>
-                            <span>OPS</span>
-                            <span>HR</span>
-                        </div>
-                        <div className="container-col">
-                            {batLine(CBattingStats)}
-                        </div>
-                    </div>
-                    </>}
-                </div>
-                
-                <div className="playercard">
+                <StatLine name={Name} BattingStats={BattingStats} PitchingStats={PitchingStats} FieldingStats={FieldingStats} TeamColor={TeamColor} />
+                    
+                <StatLine name={CName} BattingStats={CBattingStats} PitchingStats={CPitchingStats} FieldingStats={CFieldingStats} TeamColor={CTeamColor} />
+
+                <div className="playercard" style={{ '--team-color-top': CTeamColor || '#0E5F43', '--team-color-bottom': (CTeamColor === '#101010' ? '#FD5A1E' : CTeamColor) || '#0E5F43' }}>
                     <img className="stats-headshot"src={CImg} alt=""/>
                     <div className="player-name">{CName}</div>
                     <div className="player-name">{CPos}</div>
+                    <StatusBadge status={CStatus} teamColor={CTeamColor} />
                 </div>
             </div>
         </>
