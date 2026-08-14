@@ -168,7 +168,7 @@ export default function App() {
         setCPitch(data);
       })
     );
-    // also fetch fielding stats for comparison player
+    
     fetch(`${process.env.REACT_APP_HOSTNAME}/player/${id}/fielding`).then((res) =>
       res.json().then((data) => {
         setCField(data);

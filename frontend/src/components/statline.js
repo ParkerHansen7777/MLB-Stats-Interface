@@ -7,8 +7,13 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
     
     return(
         <div className="container-col" id="statline" style={{ '--team-color': TeamColor || 'var(--mlb-green)'}}>
-        {(BattingStats.length !== 0 && BattingStats.atBats !== 0) && 
-        <button className="btn btn-hitting" onClick={() => setToggleHitting(!toggleHitting)}>Show Hitting Stats</button> }
+            <div className="container-row">
+                {(BattingStats.length !== 0 && BattingStats.atBats !== 0) && 
+                <button className="btn btn-hitting" style={{ background: `linear-gradient(135deg, ${TeamColor || 'var(--mlb-green)'} 0%, ${TeamColor || 'var(--mlb-green)'} 90%, rgba(0,0,0,0.2) 100%)` }} onClick={() => setToggleHitting(!toggleHitting)}>Show Hitting Stats</button> }
+                {PitchingStats.length !== 0 && 
+                <button className="btn btn-pitching" style={{ background: `linear-gradient(135deg, ${TeamColor || 'var(--mlb-green)'} 0%, ${TeamColor || 'var(--mlb-green)'} 90%, rgba(0,0,0,0.2) 100%)` }} onClick={() => setTogglePitching(!togglePitching)}>Show Pitching Stats</button>}
+                <button className="btn btn-fielding" style={{ background: `linear-gradient(135deg, ${TeamColor || 'var(--mlb-green)'} 0%, ${TeamColor || 'var(--mlb-green)'} 90%, rgba(0,0,0,0.2) 100%)` }} onClick={() => setToggleFielding(!toggleFielding)}>Show Fielding Stats</button>
+            </div>
             {toggleHitting &&
             <div className="container-col">
                 <h2> {name}'s Hitting Stats</h2>
@@ -28,8 +33,7 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
                 </table>
             </div>}
         
-            {PitchingStats.length !== 0 && 
-            <button className="btn btn-pitching" onClick={() => setTogglePitching(!togglePitching)}>Show Pitching Stats</button>}
+            
             {togglePitching &&
             <div className="container-col">
                 <h2> {name}'s Pitching Stats</h2>
@@ -51,7 +55,7 @@ export default function StatLine({name, BattingStats, PitchingStats, FieldingSta
             
             
             <div className="container-col">
-                <button className="btn btn-fielding" onClick={() => setToggleFielding(!toggleFielding)}>Show Fielding Stats</button>
+                
                 {toggleFielding &&
                 <>
                 <h2> {name}'s Fielding Stats</h2>
